@@ -1,0 +1,12 @@
+*.py[cod]
+*\.idea*
+*\.vscode*
+/.pytest_cache
+/daudonmailscrumy/__pycache__
+/myscrumy/__pycache__
+!.gitignore
+*.pyc
+*.ini
+**.ini
+**/node_modules*
+**.log
