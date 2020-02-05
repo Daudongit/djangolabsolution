@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 class GoalStatus(models.Model):
     status_name     = models.CharField(max_length=120)
 
+    def __str__(self):
+        return self.status_name
+
 
 
 
@@ -21,6 +24,10 @@ class ScrumyGoals(models.Model):
                          null=True
                       )
 
+    def __str__(self):
+        return self.goal_name
+
+
 
 class ScrumyHistory(models.Model):
     moved_by        = models.CharField(max_length=120)
@@ -30,6 +37,8 @@ class ScrumyHistory(models.Model):
     time_of_action  = models.DateTimeField()
     goal            = models.ForeignKey(ScrumyGoals, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.created_by
 
 
 
