@@ -1,4 +1,5 @@
 import random
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
@@ -8,9 +9,16 @@ def index(request):
     goals = ScrumyGoals.objects.filter(goal_name="Learn Django")
     return HttpResponse(goals)
 
-def move_goal(request, goal_id):
-    goal = ScrumyGoals.objects.get(goal_id=goal_id)
+def move_goal(request,goal_id):
+    try:
+        goal = ScrumyGoals.objects.get(goal_id = goal_id)
+    except ObjectDoesNotExist:
+        context = {
+            "error":"A record with that goal id does not exist"
+        }
+        return render(request,"daudonmailscrumy/exception.html",context)    
     return HttpResponse(goal)
+
 
 def add_goal(request):
     ScrumyGoals.objects.create(
